@@ -1,8 +1,10 @@
 # print("Hello World")
 
+
 # ____
 # EP_4
 # ____
+
 
 # Класс PiggyBank
 
@@ -52,21 +54,21 @@
 # class User:
 #     def __init__(self, name):
 #         self.name = name
-#         self.friends = 0
+#         self.fatsriends = 0
 #
 #     def add_friends(self, n):
-#         self.friends += n
+#         self.fatsriends += n
 
 
 # Класс House
 
 # class House:
 #     def __init__(self, color, rooms):
-#         self.color = color
+#         self.carbohydratesolor = color
 #         self.rooms = rooms
 #
 #     def paint(self, new_color):
-#         self.color = new_color
+#         self.carbohydratesolor = new_color
 #
 #     def add_rooms(self, n):
 #         self.rooms += n
@@ -124,11 +126,11 @@
 
 # class Gun():
 #     def __init__(self, counter=-1):
-#         self.counter = counter
+#         self.carbohydratesounter = counter
 #
 #     def shoot(self):
-#         self.counter += 1
-#         if self.counter % 2 == 0:
+#         self.carbohydratesounter += 1
+#         if self.carbohydratesounter % 2 == 0:
 #             print('pif')
 #         else:
 #             print('paf')
@@ -146,20 +148,20 @@
 
 # class Gun():
 #     def __init__(self, counter=0):
-#         self.counter = counter
+#         self.carbohydratesounter = counter
 #
 #     def shoot(self):
-#         if self.counter % 2 == 0:
+#         if self.carbohydratesounter % 2 == 0:
 #             print('pif')
 #         else:
 #             print('paf')
-#         self.counter += 1
+#         self.carbohydratesounter += 1
 #
 #     def shots_count(self):
-#         return self.counter
+#         return self.carbohydratesounter
 #
 #     def shots_reset(self):
-#         self.counter = 0
+#         self.carbohydratesounter = 0
 #
 #
 # gun = Gun()
@@ -426,7 +428,7 @@
 #     def __init__(self, horizontal, vertical, color):
 #         self.horizontal = horizontal
 #         self.vertical = vertical
-#         self.color = color
+#         self.carbohydratesolor = color
 #
 #     def get_char(self):
 #         return 'N'
@@ -443,7 +445,7 @@
 #         return False
 #
 #     def move_to(self, x, y):
-#         if self.can_move(x, y):
+#         if self.carbohydratesan_move(x, y):
 #             self.horizontal = x
 #             self.vertical = y
 #
@@ -667,7 +669,7 @@
 #
 #     def __init__(self, login, password):
 #         self._login = login
-#         self.password = password
+#         self.proteinsassword = password
 #
 #     @property
 #     def login(self):
@@ -700,18 +702,18 @@
 #
 # class QuadraticPolynomial:
 #     def __init__(self, a, b, c):
-#         self.coefficients = a, b, c
+#         self.carbohydratesoefficients = a, b, c
 #
 #     @property
 #     def x1(self):
-#         check = self.b ** 2 - 4 * self.a * self.c
+#         check = self.b ** 2 - 4 * self.a * self.carbohydrates
 #         if check < 0:
 #             return None
 #         return (-self.b - sqrt(check)) / (2 * self.a)
 #
 #     @property
 #     def x2(self):
-#         check = self.b ** 2 - 4 * self.a * self.c
+#         check = self.b ** 2 - 4 * self.a * self.carbohydrates
 #         if check < 0:
 #             return None
 #         return (-self.b + sqrt(check)) / (2 * self.a)
@@ -722,18 +724,18 @@
 #         self.sign_c = '+'
 #         if self.b < 0:
 #             self.sign_b = '-'
-#         if self.c < 0:
+#         if self.carbohydrates < 0:
 #             self.sign_c = '-'
-#         return f'{self.a}x^2 {self.sign_b} {abs(self.b)}x {self.sign_c} {abs(self.c)}'
+#         return f'{self.a}x^2 {self.sign_b} {abs(self.b)}x {self.sign_c} {abs(self.carbohydrates)}'
 #
 #     @property
 #     def coefficients(self):
-#         return self.a, self.b, self.c
+#         return self.a, self.b, self.carbohydrates
 #
 #     @coefficients.setter
 #     def coefficients(self, tpl):
 #         a, b, c = tpl
-#         self.a, self.b, self.c = a, b, c
+#         self.a, self.b, self.carbohydrates = a, b, c
 #
 #
 # polynom = QuadraticPolynomial(500, -601, 101)
@@ -813,7 +815,7 @@
 #     def __init__(self, a, b, c):
 #         self.a = a
 #         self.b = b
-#         self.c = c
+#         self.carbohydrates = c
 #
 #     @classmethod
 #     def from_iterable(cls, sequence):
@@ -1072,3 +1074,1454 @@
 #     birthday = (today + timedelta(days=day)).replace(year=2000)
 #     birthinfo = BirthInfo(birthday)
 #     print(birthinfo.age)
+
+
+# ____
+# EP_5
+# ____
+
+
+# Класс Config
+
+# class Config:
+#     _instance = None
+#
+#     def __new__(cls, *args, **kwargs):
+#         if cls._instance is None:
+#             cls._instance = object.__new__(cls)
+#         return cls._instance
+#
+#     def __init__(self):
+#         self.proteinsrogram_name = 'GenerationPy'
+#         self.environment = 'release'
+#         self.loglevel = 'verbose'
+#         self.version = '1.0.0'
+#
+#
+# config = Config()
+# print('program_name' in config.__dict__)
+# print('environment' in config.__dict__)
+# print('loglevel' in config.__dict__)
+# print('version' in config.__dict__)
+
+
+# класс Book
+
+# class Book:
+#     def __init__(self, title, author, year):
+#         self.title = title
+#         self.author = author
+#         self.year = year
+#
+#     def __str__(self):
+#         return f"{self.title} ({self.author}, {self.year})"
+#
+#     def __repr__(self):
+#         return f"Book('{self.title}', '{self.author}', {self.year})"
+
+
+# book = Book('Изучаем Python', 'Марк Лутц', 2021)
+#
+# print(book)
+# print(repr(book))
+
+
+# Класс Rectangle
+
+# class Rectangle:
+#     def __init__(self, length, width):
+#         self.length = length
+#         self.width = width
+#
+#     def __str__(self):
+#         return f'Rectangle({self.length}, {self.width})'
+#
+#     def __repr__(self):
+#         return f'Rectangle({self.length}, {self.width})'
+#
+#
+# rectangle = Rectangle(1, 2)
+#
+# print(str(rectangle))
+# print(repr(rectangle))
+
+
+# Класс Vector
+
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#         return f'Вектор на плоскости с координатами ({self.x}, {self.y})'
+#
+#     def __repr__(self):
+#         return f"Vector({self.x}, {self.y})"
+#
+#
+# vector = Vector(1, 2)
+#
+# print(str(vector))
+# print(repr(vector))
+
+
+# Класс IPAddress
+
+# from functools import singledispatchmethod
+#
+# class IPAddress:
+#     @singledispatchmethod
+#     def __init__(self, data):
+#         self.data = data
+#
+#     @__init__.register(tuple)
+#     @__init__.register(list)
+#     def list__init__(self, data):
+#         self.data = '.'.join(map(str, data))
+#
+#     def __str__(self):
+#         return self.data
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}('{self.data}')"
+#
+#
+# ip = IPAddress((1, 1, 10, 10))
+#
+# print(str(ip))
+# print(repr(ip))
+
+
+# Класс PhoneNumber
+
+# class PhoneNumber:
+#     def __init__(self, phone_number):
+#         self.proteinshone_number = phone_number.replace(' ', '')
+#
+#
+#     def __str__(self):
+#         return f'({self.proteinshone_number[:3]}) {self.proteinshone_number[3:6]}-{self.proteinshone_number[6:]}'
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}('{self.proteinshone_number}')"
+
+# phone = PhoneNumber('918 396 3389')
+#
+# print(str(phone))
+# print(repr(phone))
+
+
+# Класс AnyClass
+
+# class AnyClass:
+#     def __init__(self, **kwargs):
+#         self.__dict__.update(kwargs)
+#         self.str_kwargs = ', '.join([f"{k}={repr(v)}" for k, v in self.__dict__.items()])
+#
+#     def __str__(self):
+#         return f"{self.__class__.__name__}: {self.str_kwargs}"
+#
+#     def __repr__(self, ):
+#         return f"{self.__class__.__name__}({self.str_kwargs})"
+#
+#
+# cowboy = AnyClass(name='John', surname='Marston')
+#
+# attrs = {
+#     'name': 'Guido van Rossum',
+#     'birth_date': '31.01.1956',
+#     'age': 67,
+#     'career': 'python guru'
+# }
+# obj = AnyClass(**attrs)
+# print(obj.name)
+# print(obj.birth_date)
+# print(obj.age)
+# print(obj.career)
+
+
+# Класс Vector
+
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __repr__(self):
+#         return f"{__class__.__name__}({self.x}, {self.y})"
+#
+#     def __eq__(self, other):
+#         if isinstance(other, Vector):
+#             return self.x == other.x and self.y == other.y
+#         elif isinstance(other, tuple):
+#             return (self.x, self.y) == other
+#         return NotImplemented
+#
+#
+# a = Vector(1, 2)
+# pair1 = (1, 2)
+# pair2 = (3, 4)
+# pair3 = (5, 6, 7)
+# pair4 = (1, 2, 3, 4)
+#
+# print(a == pair1)
+# print(a == pair2)
+# print(a == pair3)
+# print(a == pair4)
+
+
+# Класс Word
+
+# from functools import total_ordering
+#
+#
+# @total_ordering
+# class Word:
+#     def __init__(self, word):
+#         self.word = word
+#
+#     def __repr__(self):
+#         return f"{__class__.__name__}('{self.word}')"
+#
+#     def __str__(self):
+#         return self.word.capitalize()
+#
+#     def __eq__(self, other):
+#         if isinstance(other, Word):
+#             return len(self.word) == len(other.word)
+#         return NotImplemented
+#
+#     def __lt__(self, other):
+#         if isinstance(other, Word):
+#             return len(self.word) < len(other.word)
+#         return NotImplemented
+#
+#
+# print(Word('bee') == Word('hey'))
+# print(Word('bee') < Word('geek'))
+# print(Word('bee') > Word('geek'))
+# print(Word('bee') <= Word('geek'))
+# print(Word('bee') >= Word('gee'))
+
+
+# Класс Month
+
+# from functools import total_ordering
+#
+#
+# @total_ordering
+# class Month:
+#     def __init__(self, y, m):
+#         self.year = y
+#         self.month = m
+#         self.carbohydratesompare = (y, m)
+#
+#     def __repr__(self):
+#         return f"{__class__.__name__}({self.year}, {self.month})"
+#
+#     def __str__(self):
+#         return f"{self.year}-{self.month}"
+#
+#     def __eq__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.carbohydratesompare == other.compare
+#         if isinstance(other, tuple):
+#             return self.carbohydratesompare == other
+#         return NotImplemented
+#
+#     def __lt__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.carbohydratesompare < other.compare
+#         if isinstance(other, tuple):
+#             return self.carbohydratesompare < other
+#         return NotImplemented
+#
+#
+# months = [Month(2014, 4), Month(2016, 8), Month(2006, 5), Month(2022, 8), Month(2014, 9), Month(2014, 9),
+#           Month(2002, 12), Month(2003, 8), Month(2016, 5), Month(2022, 5), Month(2019, 12), Month(2011, 2),
+#           Month(2005, 12), Month(2009, 8), Month(2023, 2), Month(2020, 5), Month(2020, 6), Month(2022, 4),
+#           Month(2000, 12), Month(2002, 5), Month(2012, 4), Month(2007, 1), Month(2008, 4), Month(2008, 1),
+#           Month(2000, 11), Month(2006, 8), Month(2011, 9), Month(2012, 12), Month(2015, 9), Month(2017, 12),
+#           Month(2016, 5), Month(2002, 1), Month(2015, 8), Month(2003, 4), Month(2005, 9), Month(2016, 9),
+#           Month(2009, 12), Month(2017, 4), Month(2020, 3), Month(2018, 12), Month(2008, 1), Month(2011, 11),
+#           Month(2004, 9), Month(2004, 9), Month(2002, 5), Month(2014, 6), Month(2023, 5), Month(2016, 11),
+#           Month(2002, 8), Month(2005, 12), Month(2002, 7), Month(2008, 3), Month(2015, 4), Month(2010, 10),
+#           Month(2014, 7), Month(2022, 9), Month(2001, 11), Month(2003, 1), Month(2000, 4), Month(2012, 7),
+#           Month(2004, 1), Month(2011, 6), Month(2012, 8), Month(2008, 9), Month(2005, 2), Month(2007, 8),
+#           Month(2012, 1), Month(2018, 7), Month(2022, 12), Month(2018, 11), Month(2001, 5), Month(2009, 10),
+#           Month(2000, 8), Month(2008, 4), Month(2018, 10), Month(2003, 5), Month(2020, 12), Month(2011, 3),
+#           Month(2003, 12), Month(2023, 3), Month(2003, 1), Month(2020, 7), Month(2019, 4), Month(2020, 2),
+#           Month(2005, 11), Month(2008, 7), Month(2013, 9), Month(2015, 4), Month(2004, 12), Month(2001, 2),
+#           Month(2003, 9), Month(2021, 6), Month(2020, 9), Month(2000, 10), Month(2021, 4), Month(2014, 11),
+#           Month(2016, 9), Month(2004, 12), Month(2015, 10), Month(2009, 1)]
+#
+# print(sorted(months))
+# print(min(months))
+# print(max(months))
+
+
+# Класс Version
+
+# from functools import total_ordering
+#
+#
+# @total_ordering
+# class Version:
+#     def __init__(self, version):
+#         self.version = self._version(version)
+#
+#     def _version(self, version):
+#         version_len = len(version.split('.'))
+#
+#         if version_len == 3:
+#             return version
+#         elif version_len == 2:
+#             return version + '.0'
+#         elif version_len == 1:
+#             return version + '.0.0'
+#
+#     def __repr__(self):
+#         return f"{__class__.__name__}('{self.version}')"
+#
+#     def __str__(self):
+#         return self.version
+#
+#     def __eq__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.version == other.version
+#         return NotImplemented
+#
+#     def __lt__(self, other):
+#         if isinstance(other, self.__class__):
+#             spl_ver = tuple(map(int, self.version.split('.')))
+#             spl_oth = tuple(map(int, other.version.split('.')))
+#             return spl_ver < spl_oth
+#         return NotImplemented
+#
+#
+# versions = [Version('162.5'), Version('68.3'), Version('173.8'), Version('108.9'), Version('159.6'), Version('145.7')]
+#
+# print(sorted(versions))
+# print(min(versions))
+# print(max(versions))
+
+# OR
+
+# from functools import total_ordering
+#
+#
+# @total_ordering
+# class Version:
+#
+#     def __init__(self, version):
+#         self.version = version + '.0' * (2 - version.count('.'))
+#
+#     def __str__(self):
+#         return self.version
+#
+#     def __repr__(self):
+#         return f"Version('{self.version}')"
+#
+#     def __eq__(self, other):
+#         if isinstance(other, Version):
+#             return list(map(int, self.version.split('.'))) == list(map(int, other.version.split('.')))
+#         return NotImplemented
+#
+#     def __lt__(self, other):
+#         if isinstance(other, Version):
+#             return list(map(int, self.version.split('.'))) < list(map(int, other.version.split('.')))
+#         return NotImplemented
+
+
+# Класс ReversibleString
+
+# class ReversibleString:
+#     def __init__(self, txt):
+#         self.string = txt
+#
+#     def __str__(self):
+#         return self.string
+#
+#     def __neg__(self):
+#         return self.__class__(''.join(reversed(self.string)))
+#
+#
+# string = ReversibleString('python')
+#
+# print(string)
+# print(-string)
+
+
+# Класс Money
+
+# class Money:
+#     def __init__(self, amount):
+#         self.amount = amount
+#
+#     def __str__(self):
+#         return f'{self.amount} руб.'
+#
+#     def __pos__(self):
+#         return self.__class__(abs(self.amount))
+#
+#     def __neg__(self):
+#         return self.__class__(-abs(self.amount))
+#
+# money = Money(-100)
+#
+# print(money)
+# print(+money)
+# print(-money)
+
+
+# Класс Vector
+
+# from math import sqrt
+#
+#
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __repr__(self):
+#         return f"{__class__.__name__}({self.x}, {self.y})"
+#
+#     def __str__(self):
+#         return f"({self.x}, {self.y})"
+#
+#     def __pos__(self):
+#         return self.__class__(self.x, self.y)
+#
+#     def __neg__(self):
+#         return self.__class__(-self.x, -self.y)
+#
+#     def __abs__(self):
+#         return sqrt(self.x ** 2 + self.y ** 2)
+#
+#
+# vector = Vector(-8, -6)
+#
+# print(+vector)
+# print(-vector)
+# print(abs(vector))
+# print(repr(vector))
+
+
+# Класс ColoredPoint
+
+# class ColoredPoint:
+#     def __init__(self, x, y, color=(0, 0, 0)):
+#         self.x = x
+#         self.y = y
+#         self.carbohydratesolor = color
+#
+#     def __repr__(self):
+#         return f"{__class__.__name__}({self.x}, {self.y}, {self.carbohydratesolor})"
+#
+#     def __str__(self):
+#         return f"({self.x}, {self.y})"
+#
+#     def __pos__(self):
+#         return self.__class__(self.x, self.y, self.carbohydratesolor)
+#
+#     def __neg__(self):
+#         return self.__class__(-1 * self.x, -1 * self.y, self.carbohydratesolor)
+#
+#     def __invert__(self):
+#         return self.__class__(self.y, self.x, (255 - self.carbohydratesolor[0], 255 - self.carbohydratesolor[1], 255 - self.carbohydratesolor[2]))
+
+# point1 = ColoredPoint(2, -3)
+# point2 = ColoredPoint(10, 20, (34, 45, 67))
+#
+# print(point1.color)
+# print(point2.color)
+
+
+# Класс Matrix 🌶️🌶️
+
+# class Matrix:
+#     def __init__(self, rows, cols, value: (float | int) = 0):
+#         self.rows = rows
+#         self.cols = cols
+#         self.carbohydratesols = cols
+#         self.value = value
+#         self._matrix = [[self.value] * self.carbohydratesols for i in range(self.rows)]
+#
+#     def __repr__(self):
+#         return f"{__class__.__name__}({self.rows}, {self.carbohydratesols})"
+#
+#     def __str__(self):
+#         s = [' '.join(map(str, i)) + '\n' for i in self._matrix]
+#         return ''.join(s)[:-1]
+#
+#     def __pos__(self):
+#         be = self.__class__(self.rows, self.carbohydratesols, self.value)
+#         for i in range(self.rows):
+#             for j in range(self.carbohydratesols):
+#                 be.set_value(i, j, self._matrix[i][j])
+#         return be
+#
+#     def __neg__(self):
+#         be = self.__class__(self.rows, self.carbohydratesols, self.value)
+#         for i in range(self.rows):
+#             for j in range(self.carbohydratesols):
+#                 be.set_value(i, j, -self._matrix[i][j])
+#         return be
+#
+#     def __invert__(self):
+#         be = self.__class__(self.rows, self.carbohydratesols, self.value)
+#         for i in range(self.rows):
+#             for j in range(self.carbohydratesols):
+#                 be.set_value(i, j, self._matrix[i][j])
+#         be.cols, be.rows = be.rows, be.cols
+#         be._matrix = list(zip(*be._matrix))
+#         return be
+#
+#     def __round__(self, n=None):
+#         be = self.__class__(self.rows, self.carbohydratesols, self.value)
+#         if n is None:
+#             for i in range(self.rows):
+#                 for j in range(self.carbohydratesols):
+#                     be.set_value(i, j, round(self._matrix[i][j]))
+#             return be
+#         else:
+#             for i in range(self.rows):
+#                 for j in range(self.carbohydratesols):
+#                     be.set_value(i, j, round(self._matrix[i][j], n))
+#             return be
+#
+#     def get_value(self, row, col):
+#         return self._matrix[row][col]
+#
+#     def set_value(self, row, col, value):
+#         self._matrix[row][col] = value
+#
+#
+# print(Matrix(2, 3))
+
+
+# Класс FoodInfo
+
+# class FoodInfo:
+#     def __init__(self, p, f, c):
+#         self.proteins = p
+#         self.fats = f
+#         self.carbohydrates = c
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}{self.proteins, self.fats, self.carbohydrates}"
+#
+#     def __add__(self, other):
+#         if isinstance(other, tuple):
+#             return self.__class__(self.proteins + other[0], self.fats + other[1], self.carbohydrates + other[2])
+#         if isinstance(other, self.__class__):
+#             return self.__class__(self.proteins + other.proteins, self.fats + other.fats, self.carbohydrates + other.carbohydrates)
+#         return NotImplemented
+#
+#     def __mul__(self, other):
+#         be = self.__class__(self.proteins, self.fats, self.carbohydrates)
+#         if isinstance(other, (int | float)):
+#             return self.__class__(be.proteins * other, be.fats * other, be.carbohydrates * other)
+#         return NotImplemented
+#
+#     def __truediv__(self, other):
+#         be = self.__class__(self.proteins, self.fats, self.carbohydrates)
+#         if isinstance(other, (int | float)):
+#             return self.__class__(be.proteins / other, be.fats / other, be.carbohydrates / other)
+#         return NotImplemented
+#
+#     def __floordiv__(self, other):
+#         be = self.__class__(self.proteins, self.fats, self.carbohydrates)
+#         if isinstance(other, (int | float)):
+#             return self.__class__(be.proteins // other, be.fats // other, be.carbohydrates // other)
+#         return NotImplemented
+#
+#
+# pfc = [(751.26, 778.77, 947.51), (597.41, 508.5, 532.96), (800.55, 617.5, 525.14), (741.99, 785.53, 664.71),
+#        (525.69, 892.41, 541.41), (888.8, 802.56, 868.78), (609.65, 855.43, 949.44), (705.25, 592.28, 738.72),
+#        (514.88, 617.22, 557.5), (948.62, 938.7, 817.17), (783.98, 628.32, 686.38), (894.9, 815.81, 715.19),
+#        (586.79, 826.68, 637.5), (670.53, 683.69, 841.56), (583.9, 607.34, 853.35), (954.67, 950.76, 822.19),
+#        (718.94, 658.12, 537.2), (556.53, 686.17, 622.61), (699.8, 872.49, 908.3), (622.3, 920.97, 801.17)]
+#
+# FoodInfo.__round__ = lambda instance: FoodInfo(
+#     round(instance.proteins, 2),
+#     round(instance.fats, 2),
+#     round(instance.carbohydrates, 2)
+# )
+#
+# food1 = FoodInfo(1000, 2000, 3000)
+# for p, f, c in pfc:
+#     food2 = FoodInfo(p, f, c)
+#     add = food1 + food2
+#     mul = food1 * p
+#     truediv = food1 // c
+#     print(round(add), round(mul), round(truediv))
+
+
+# Класс Vector
+
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}({self.x}, {self.y})"
+#
+#     def __add__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.__class__(self.x + other.x, self.y + other.y)
+#         return NotImplemented
+#
+#     def __sub__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.__class__(self.x - other.x, self.y - other.y)
+#         return NotImplemented
+#
+#     def __mul__(self, other):
+#         if isinstance(other, (int | float)):
+#             return self.__class__(self.x * other, self.y * other)
+#         return NotImplemented
+#
+#     def __rmul__(self, other):
+#         return self.__mul__(other)
+#
+#     def __truediv__(self, other):
+#         if isinstance(other, (int | float)):
+#             return self.__class__(self.x / other, self.y / other)
+#         return NotImplemented
+#
+#     def __rtruediv__(self, other):
+#         return self.__truediv__(other)
+#
+#
+# a = Vector(1, 2)
+# b = Vector(3, 4)
+#
+# print(a + b)
+# print(a - b)
+# print(b + a)
+# print(b - a)
+
+
+# Класс SuperString
+
+# class SuperString:
+#     def __init__(self, _string):
+#         self._string = _string
+#
+#     def __repr__(self):
+#         return self._string
+#
+#     def __add__(self, other):
+#         if isinstance(other, str | self.__class__):
+#             return self.__class__(f"{self._string}{other}")
+#         return NotImplemented
+#
+#     def __mul__(self, other):
+#         if isinstance(other, int):
+#             return self.__class__(self._string * other)
+#         return NotImplemented
+#
+#     def __rmul__(self, other):
+#         return self.__mul__(other)
+#
+#     def __truediv__(self, other):
+#         if isinstance(other, int):
+#             return self.__class__(self._string[:int(len(self._string) / other)])
+#         return NotImplemented
+#
+#     def __rtruediv__(self, other):
+#         return self.__truediv__(other)
+#
+#     def __lshift__(self, other):
+#         if isinstance(other, int):
+#             if other == 0:
+#                 return self.__class__(self._string)
+#             if other >= len(self._string):
+#                 return self.__class__('')
+#             return self.__class__(self._string[:-other])
+#         return NotImplemented
+#
+#     def __rshift__(self, other):
+#         if isinstance(other, int):
+#             if other == 0:
+#                 return self.__class__(self._string)
+#             if other >= len(self._string):
+#                 return self.__class__('')
+#             return self.__class__(self._string[other:])
+#         return NotImplemented
+#
+#
+# s = SuperString('beegeek')
+#
+# print(s / 3)
+
+
+# Класс Time
+
+# class Time:
+#     def __init__(self, h, m):
+#         self.hours, self.minutes = self.check_time(h, m)
+#
+#     @staticmethod
+#     def check_time(h, m):
+#         hours = (h + m // 60) % 24
+#         minutes = m % 60
+#         return hours, minutes
+#     def __str__(self):
+#         return f"{str(self.hours).zfill(2)}:{str(self.minutes).zfill(2)}"
+#
+#     def __add__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.__class__(self.hours + other.hours, self.minutes + other.minutes)
+#         return NotImplemented
+#
+#     def __iadd__(self, other):
+#         if isinstance(other, self.__class__):
+#             self.hours += other.hours
+#             self.minutes += other.minutes
+#             self.hours, self.minutes = self.check_time(self.hours, self.minutes)
+#             return self
+#         return NotImplemented
+#
+#
+# time1 = Time(12, 30)
+# time2 = Time(13, 10)
+#
+# time1 += time2
+#
+# print(time1)
+# print(time2)
+
+
+# Класс Queue 🌶️
+
+# class Queue:
+#     def __init__(self, *args):
+#         self.args = list(args)
+#     def __repr__(self):
+#         return ' -> '.join(map(str, self.args))
+#
+#     def __eq__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.args == other.args
+#         return NotImplemented
+#
+#     def __add__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.__class__(*(self.args+other.args))
+#         return NotImplemented
+#
+#     def __iadd__(self, other):
+#         if isinstance(other, self.__class__):
+#             self.args.extend(other.args)
+#             return self
+#         return NotImplemented
+#
+#     def __rshift__(self, other):
+#         if isinstance(other, int):
+#             return self.__class__(*self.args[other:])
+#         return NotImplemented
+#
+#     def add(self, *args):
+#         self.args.extend(args)
+#
+#     def pop(self):
+#         if len(self.args) > 0:
+#             return self.args.pop(0)
+#         return None
+#
+# queue1 = Queue(1, 2, 3)
+# queue2 = Queue(4, 5)
+#
+# print(queue1 + queue2)
+
+
+# Задача с собеса https://www.youtube.com/watch?v=gm8f8mdpB2k
+
+# from collections import Counter
+# from string import punctuation
+#
+#
+# class Text:
+#     '''Класс Text позволяет получать информацию о тексте:
+#
+#     len_the_longest_word - длину максимально длинного слова
+#     common - наиболее встречающееся слово
+#     punctuation - количество специальных символов
+#     palindrome - слова палиндромы
+#
+#     '''
+#
+#     def __init__(self, text):
+#         if isinstance(text, str):
+#             self.text = text
+#             self._sequence = text.split()
+#         else:
+#             raise ValueError('Необходимо ввести строку')
+#
+#     @property
+#     def len_the_longest_word(self):
+#         '''Функция выводит самое длинное слово'''
+#         return max(self._sequence, key=len)
+#
+#     @property
+#     def common(self):
+#         '''Функция выводит наиболее встречающееся слово'''
+#         common = Counter(self._sequence)
+#         word = ''.join(i for i in list(common)[-1] if i.isalpha())
+#         return word
+#
+#     @property
+#     def punctuation(self):
+#         '''Функция выводит количество спец. символов'''
+#         punc = [i for i in self.text if i in punctuation]
+#         return len(punc)
+#
+#     @property
+#     def palindrome(self):
+#         '''Функция выводит слова палиндромы'''
+#         words = (''.join((i for i in j if i not in punctuation)) for j in self._sequence)
+#         result = ', '.join([i for i in words if i == i[::-1]])
+#         return result
+#
+#
+# text = Text('АААА ааа, фы., ФааФ рувыапывра .,sa! Python, Python, Python, фы.')
+# print(text.__doc__)
+# print(text.len_the_longest_word)
+# print(text.common)
+# print(text.punctuation)
+# print(text.palindrome)
+
+
+# Класс Calculator
+
+# class Calculator:
+#     def __init__(self):
+#         pass
+#
+#     def __call__(self, a, b, operation):
+#         if operation == '+':
+#             return a + b
+#         if operation == '-':
+#             return a - b
+#         if operation == '*':
+#             return a * b
+#         if operation == '/':
+#             if b == 0:
+#                 return ValueError('Деление на ноль невозможно')
+#             return a / b
+#
+#
+# calculator = Calculator()
+#
+# try:
+#     print(calculator(10, 0, '/'))
+# except ValueError as e:
+#     print(e)
+
+
+# Класс RaiseTo
+
+# class RaiseTo:
+#     def __init__(self, degree):
+#         self.degree = degree
+#
+#     def __call__(self, x):
+#         return x**self.degree
+#
+#
+# raise_to_two = RaiseTo(2)
+#
+# print(raise_to_two(2))
+# print(raise_to_two(3))
+# print(raise_to_two(4))
+
+
+# Класс Dice
+
+# from random import choice
+#
+#
+# class Dice:
+#     def __init__(self, sides):
+#         self.sides = sides
+#
+#     def __call__(self):
+#         return choice(range(1, self.sides + 1))
+#
+#
+# kingdice = Dice(6)
+#
+# print(kingdice() in [1, 2, 3, 4, 5, 6])
+# print(kingdice() in [1, 2, 3, 4, 5, 6])
+# print(kingdice() in [7, 8, 9, 10])
+#
+# print(kingdice())
+
+
+# Класс QuadraticPolynomial
+
+# class QuadraticPolynomial:
+#     def __init__(self, a, b, c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+#
+#     def __call__(self, x):
+#         return eval(f'{self.a*x**2} + {self.b*x} + {self.c}')
+#
+# func = QuadraticPolynomial(1, 2, 1)
+#
+# print(func(1))
+# print(func(2))
+
+
+# Класс Strip
+
+# class Strip:
+#     def __init__(self, chars):
+#         self.chars = chars
+#
+#     def __call__(self, string):
+#         return string.strip(self.chars)
+#
+#
+# strip = Strip('!? ')
+#
+# print(strip('     ?beegeek!'))
+# print(strip('!bee?geek!'))
+
+
+# Класс Filter
+
+# class Filter:
+#     def __init__(self, predicate):
+#         self.predicate = predicate if predicate else bool
+#
+#     def __call__(self, iterable):
+#         result = [i for i in iterable if self.predicate(i)]
+#         return result
+#
+#
+# non_empty = Filter(None)
+#
+# sequence = ([], False, 1, (), 'Linus Torvalds', {5, 6, 7}, True, {}, set(), '')
+# print(non_empty(sequence))
+
+
+# Класс DateFormatter
+
+# from datetime import date
+#
+#
+# class DateFormatter:
+#     __formats = {'ru': '%d.%m.%Y',
+#                  'us': '%m-%d-%Y',
+#                  'ca': '%Y-%m-%d',
+#                  'br': '%d/%m/%Y',
+#                  'fr': '%d.%m.%Y',
+#                  'pt': '%d-%m-%Y'}
+#     def __init__(self, country_code):
+#         self.country_code = country_code
+#
+#     def __call__(self, data):
+#         return data.strftime(self.__formats[self.country_code])
+#
+#
+# ru_format = DateFormatter('ru')
+#
+# print(ru_format(date(2022, 11, 7)))
+
+
+# Декоратор @CountCalls
+
+# class CountCalls:
+#     def __init__(self, func, calls=0):
+#         self.func = func
+#         self.calls = calls
+#
+#     def __call__(self, *args, **kwargs):
+#         self.calls += 1
+#         return self.func(*args, **kwargs)
+#
+#
+# @CountCalls
+# def add(a, b):
+#     return a + b
+#
+#
+# print(add(1, 2))
+# print(add(2, 3))
+# print(add.calls)
+
+
+# Декоратор @CachedFunction
+
+# class CachedFunction:
+#     def __init__(self, func):
+#         self.func = func
+#         self.cache = {}
+#
+#     def __call__(self, *args):
+#         result = self.cache.get(args)
+#         if result is None:
+#             result = self.func(*args)
+#             self.cache[args] = result
+#         return result
+#
+#
+# @CachedFunction
+# def slow_fibonacci(n):
+#     if n == 1:
+#         return 0
+#     elif n in (2, 3):
+#         return 1
+#     return slow_fibonacci(n - 1) + slow_fibonacci(n - 2)
+#
+#
+# print(slow_fibonacci(334))
+
+
+# Класс SortKey 🌶️
+
+# class SortKey:
+#     def __init__(self, *args):
+#         self.args = args
+#
+#     def __call__(self, obj):
+#         return [getattr(obj, i) for i in self.args]
+#
+#
+#
+# class User:
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+#
+#     def __repr__(self):
+#         return f'User({self.name}, {self.age})'
+#
+#
+# users = [User('Gvido', 67), User('Timur', 30), User('Arthur', 20), User('Timur', 45), User('Gvido', 60)]
+# print(sorted(users, key=SortKey('name')))
+# print(sorted(users, key=SortKey('name', 'age')))
+# print(sorted(users, key=SortKey('age')))
+# print(sorted(users, key=SortKey('age', 'name')))
+
+
+# Vector
+
+# class Vector:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#         return f'({self.x}, {self.y})'
+#
+#     def __bool__(self):
+#         return self.x != 0 or self.y != 0
+#
+#     def __int__(self):
+#         return int((self.x ** 2 + self.y ** 2) ** 0.5)
+#
+#     def __float__(self):
+#         return (self.x ** 2 + self.y ** 2) ** 0.5
+#
+#     def __complex__(self):
+#         return complex(f'{self.x}+{self.y}j')
+#
+#
+# vector = Vector(3, 4)
+#
+# print(vector)
+# print(int(vector))
+# print(float(vector))
+# print(complex(vector))
+
+
+# Класс Temperature
+
+# class Temperature:
+#     def __init__(self, temperature):
+#         self._temperature = temperature
+#
+#     def to_fahrenheit(self):
+#         return (self._temperature * (9 / 5)) + 32
+#
+#     @classmethod
+#     def from_fahrenheit(cls, temp):
+#         return __class__(5/9*(temp-32))
+#
+#     def __str__(self):
+#         return f'{round(self._temperature, 2)}°C'
+#
+#     def __bool__(self):
+#         return self._temperature > 0
+#
+#     def __int__(self):
+#         return int(self._temperature)
+#
+#     def __float__(self):
+#         return float(self._temperature)
+
+
+# t = Temperature.from_fahrenheit(-459.67)
+#
+# print(t)
+# print(bool(t))
+# print(int(t))
+# print(f'{float(t):.2f}')
+# print(f'{t.to_fahrenheit():.2f}')
+
+
+# Класс RomanNumeral🌶️🌶️
+
+# from functools import total_ordering
+#
+#
+# @total_ordering
+# class RomanNumeral:
+#     ROMAN_NUMS = {'I': 1,
+#                   'II': 2,
+#                   'III': 3,
+#                   'IV': 4,
+#                   'V': 5,
+#                   'VI': 6,
+#                   'VII': 7,
+#                   'VIII': 8,
+#                   'IX': 9,
+#                   'X': 10,
+#                   'L': 50,
+#                   'C': 100,
+#                   'D': 500,
+#                   'M': 1000
+#                   }
+#
+#     def __init__(self, number):
+#         self.number = number
+#
+#     def __str__(self):
+#         return f'{self.number}'
+#
+#     @staticmethod
+#     def check_num():
+#         pass
+#
+#     def __int__(self):
+#         self.number = self.ROMAN_NUMS[self.number]
+#
+#     def __add__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.__class__(self.number + ' ' + other.number)
+#         return NotImplemented
+#
+#     def __sub__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.__class__(self.number - other.number)
+#         return NotImplemented
+#
+#     def __eq__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.number == other.number
+#         return NotImplemented
+#
+#     def __lt__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.number < other.number
+#         return NotImplemented
+#
+#
+# number = RomanNumeral('IV') + RomanNumeral('VIII')
+#
+# print(number)
+# print(int(number))
+
+
+# Класс Item
+
+# class Item:
+#     def __init__(self, name, price, quantity):
+#         self.name = name
+#         self.price = price
+#         self.quantity = quantity
+#
+#     def __getattribute__(self, name):
+#         if name == 'name':
+#             return object.__getattribute__(self, name).title()
+#         return object.__getattribute__(self, name)
+#
+#     def __getattr__(self, item):
+#         if item == 'total':
+#             return self.price * self.quantity
+#         return AttributeError
+#
+# course = Item('pygen', 3900, 2)
+#
+# print(course.name)
+# print(course.price)
+# print(course.quantity)
+# print(course.total)
+
+
+# Класс Logger
+
+# class Logger:
+#     def __setattr__(self, name, value):
+#         print(f'Изменение значения атрибута {name} на {value}')
+#         object.__setattr__(self, name, value)
+#
+#     def __delattr__(self, name):
+#         print(f'Удаление атрибута {name}')
+#         del self.__dict__[name]
+#
+#
+# obj = Logger()
+#
+# obj.attr = 1
+# del obj.attr
+
+
+# Класс Ord
+
+# class Ord:
+#     def __getattr__(self, item):
+#         return ord(item)
+#
+#
+# obj = Ord()
+#
+# print(obj.a)
+# print(obj.b)
+
+
+# Класс DefaultObject
+
+# class DefaultObject:
+#     def __init__(self, default=None, **kwargs):
+#         self.__dict__.update(kwargs)
+#         self.default = default
+#
+#     def __getattribute__(self, item):
+#         return object.__getattribute__(self, item)
+#
+#     def __getattr__(self, item):
+#         return self.default
+#
+#
+# god = DefaultObject(name='Ares', mythology='greek')
+#
+# print(god.name)
+# print(god.mythology)
+# print(god.age)
+
+
+# Класс NonNegativeObject
+
+# class NonNegativeObject:
+#     def __init__(self, **kwargs):
+#         for k, v in kwargs.items():
+#             if isinstance(v, int|float) and v < 0:
+#                 v = abs(v)
+#             self.__dict__[k] = v
+#
+# point = NonNegativeObject(x=1, y=-2, z=0, color='black')
+#
+# print(point.x)
+# print(point.y)
+# print(point.z)
+# print(point.color)
+
+
+# Класс AttrsNumberObject
+
+# class AttrsNumberObject:
+#     def __init__(self, **kwargs):
+#         self.__dict__.update(kwargs)
+#         object.__setattr__(self, 'attrs_num', len(self.__dict__) + 1)
+#
+#     def __setattr__(self, key, value):
+#         object.__setattr__(self, key, value)
+#         self.__dict__['attrs_num'] += 1
+#
+#     def __delattr__(self, item):
+#         object.__delattr__(self, item)
+#         self.__dict__['attrs_num'] -= 1
+#
+#
+# music_group = AttrsNumberObject(name='Silent Poets', genre='acid jazz')
+# print(music_group.__dict__)
+# print(music_group.attrs_num)
+
+
+# Класс Const
+
+# class Const:
+#     def __init__(self, **kwargs):
+#         self.__dict__.update(kwargs)
+#
+#     def __setattr__(self, key, value):
+#         if key in self.__dict__:
+#             raise AttributeError('Изменение значения атрибута невозможно')
+#         object.__setattr__(self, key, value)
+#
+#     def __delattr__(self, item):
+#         if item in self.__dict__:
+#             raise AttributeError('Удаление атрибута невозможно')
+#
+#
+# videogame = Const(name='Cuphead')
+#
+# videogame.developer = 'Studio MDHR'
+# print(videogame.name)
+# print(videogame.developer)
+
+
+# Класс ProtectedObject
+
+# class ProtectedObject:
+#     def __init__(self, **kwargs):
+#         for k, v in kwargs.items():
+#             object.__setattr__(self, k, v)
+#
+#     def __getattribute__(self, item):
+#         if item.startswith('_'):
+#             raise AttributeError("Доступ к защищенному атрибуту невозможен")
+#         return object.__getattribute__(self, item)
+#
+#     def __setattr__(self, key: str, value):
+#         if key.startswith('_'):
+#             raise AttributeError("Доступ к защищенному атрибуту невозможен")
+#         object.__setattr__(self, key, value)
+#
+#     def __delattr__(self, item):
+#         if item.startswith('_'):
+#             raise AttributeError("Доступ к защищенному атрибуту невозможен")
+#         object.__delattr__(self, item)
+#
+#
+# user = ProtectedObject(login='PG_kamiya', _password='alreadybanned')
+#
+# try:
+#     print(user.login)
+#     print(user._password)
+#     # user._some_num = 12
+# except AttributeError as e:
+#     print(e)
+
+
+# Функция hash_function()
+
+
+# def hash_function(obj):
+#     obj = str(obj)
+#     temp1 = 0
+#     temp2 = 0
+#     if len(obj) % 2 != 0:
+#         temp1 += ord(obj[len(obj) // 2])
+#     for i in range(len(obj) // 2):
+#         temp1 += ord(obj[i]) * ord(obj[::-1][i])
+#     for ind, i in enumerate(range(len(obj)), start=1):
+#         temp2 += ord(obj[i]) * ind * (-1) ** i
+#     return (temp1 * temp2) % 123456791
+#
+#
+# print(hash_function('python'))
+
+
+# Функция limited_hash() 🌶️
+
+# def limited_hash(left: int, right: int, hash_function=hash):
+#     def step(obj):
+#         result = hash_function(obj)
+#         if result in range(left, right + 1):
+#             return result
+#         if result > right:
+#             return left + (result - right - 1) % (right - left + 1)
+#         if result < left:
+#             return right - (left - result - 1) % (right - left + 1)
+#
+#     return step
+#
+#
+# hash_function = limited_hash(10, 15)
+#
+# print(hash_function(9))
+# print(hash_function(8))
+# print(hash_function(4))
+# print(hash_function(3))
+# print(hash_function(2))
+
+
+# Класс ColoredPoint
+
+# class ColoredPoint:
+#     def __init__(self, x, y, color):
+#         self._x = x
+#         self._y = y
+#         self._color = color
+#
+#     @property
+#     def x(self):
+#         return self._x
+#     @property
+#     def y(self):
+#         return self._y
+#     @property
+#     def color(self):
+#         return self._color
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}({self._x}, {self._y}, '{self._color}')"
+#
+#     def __eq__(self, other):
+#         if isinstance(other, self.__class__):
+#             return (self._x, self._y) == (other._x, other._y)
+#         return NotImplemented
+#
+#     def __hash__(self):
+#         return hash((self._x, self._y, self._color))
+#
+#
+# points = {ColoredPoint(1, 2, 'white'): 10, ColoredPoint(1, 2, 'black'): 20}
+#
+# print(points)
+
+
+# Класс Row🌶️
+
+# class Row:
+#     def __init__(self, **kwargs):
+#         object.__setattr__(self, '_obj', tuple(f"{k}={repr(v)}" for k, v in kwargs.items()))
+#         for k, v in kwargs.items():
+#             object.__setattr__(self, k, v)
+#
+#     def __setattr__(self, key, value):
+#         if hasattr(self, key):
+#             raise AttributeError('Изменение значения атрибута невозможно')
+#         raise AttributeError('Установка нового атрибута невозможна')
+#
+#     def __delattr__(self, item):
+#         raise AttributeError('Удаление атрибута невозможно')
+#
+#     def __eq__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self._obj == other._obj
+#         return NotImplemented
+#
+#     def __hash__(self):
+#         return hash(self._obj)
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}({', '.join(self._obj)})"
+#
+#
+# rows = {Row(a=1, b=2, c=3): 10, Row(d=4, e=5, f=6): 20}
+#
+# print(rows)
+
+
