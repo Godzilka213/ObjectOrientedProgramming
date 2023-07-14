@@ -2525,3 +2525,1545 @@
 # print(rows)
 
 
+# ____
+# EP_6
+# ____
+
+
+# 6.1 Класс Point
+
+# class Point:
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#     def __repr__(self):
+#         return f'{self.__class__.__name__}({self.x}, {self.y}, {self.z})'
+#
+#     def __iter__(self):
+#         yield from (self.x, self.y, self.z)
+#
+#
+# point = Point(1, 2, 3)
+#
+# print(point)
+
+
+# 6.1 Класс DevelopmentTeam
+
+# class DevelopmentTeam:
+#     def __init__(self):
+#         self._juniors_seniors = list()
+#
+#     def add_junior(self, *args):
+#         self._juniors_seniors.extend(((i, 'junior') for i in args))
+#
+#     def add_senior(self, *args):
+#         self._juniors_seniors.extend(((i, 'senior') for i in args))
+#
+#     def __iter__(self):
+#         return iter(sorted(self._juniors_seniors, key=lambda x: x[1]))
+#
+#
+# smart_monkey = DevelopmentTeam()
+#
+# smart_monkey.add_senior('Gvido', 'Alan')
+# smart_monkey.add_junior('Denis')
+#
+# print(list(smart_monkey))
+
+
+# 6.1 Класс AttrsIterator
+
+# class AttrsIterator:
+#     def __init__(self, obj):
+#         self._obj = iter(obj.__dict__.items())
+#
+#     def __iter__(self):
+#         yield from self._obj
+#
+#     def __next__(self):
+#         return next(self._obj)
+#
+#
+# class User:
+#     def __init__(self, name, surname, age):
+#         self.name = name
+#         self.surname = surname
+#         self.age = age
+#
+#
+# class Kemal:
+#     def __init__(self):
+#         self.family = 'cats'
+#         self.breed = 'british'
+#         self.master = 'Kemal'
+#
+#
+# kemal = Kemal()
+# attrs_iterator = AttrsIterator(kemal)
+#
+# print(next(attrs_iterator))
+# print(next(attrs_iterator))
+# print(next(attrs_iterator))
+
+
+# 6.1 Класс SkipIterator
+
+# class SkipIterator:
+#     def __init__(self, iterable, n):
+#         self.iterable = list(iterable)
+#         self._iterator = iter(self.iterable[::n + 1])
+#         self._n = n
+#
+#     def __iter__(self):
+#         for i in range(0, len(self.iterable), self._n + 1):
+#             yield self.iterable[i]
+#
+#     def __next__(self):
+#         for i in range(self._n, len(self.iterable), self._n + 1):
+#             return next(self._iterator)
+#
+#
+# skipiterator = SkipIterator(iter([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 5)
+#
+# print(*skipiterator)
+
+# OR
+
+# class SkipIterator:
+#     def __init__(self, iterable, n):
+#         self.obj = iter(list(iterable)[::n + 1])
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         return next(self.obj)
+
+
+# 6.1 Класс RandomLooper
+
+# from random import shuffle
+#
+#
+# class RandomLooper:
+#     def __init__(self, *args):
+#         self._obj = [j for i in args for j in i]
+#         shuffle(self._obj)
+#         self._iterator = iter(self._obj)
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         return next(self._iterator)
+#
+#
+# randomlooper = RandomLooper(['red', 'blue', 'green', 'purple'], [123, 125])
+#
+# print(list(randomlooper))
+# print(list(randomlooper))
+
+
+# 6.1 Класс Peekable 🌶️
+
+# class Peekable:
+#     def __init__(self, iterable):
+#         self._iterable = iterable
+#         self._iterator = iter(iterable)
+#         self._ind = 0
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         self._ind += 1
+#         return next(self._iterator)
+#
+#     def peek(self, default=StopIteration):
+#         try:
+#             return self._iterable[self._ind]
+#         except Exception:
+#             if default == StopIteration:
+#                 raise StopIteration
+#             else:
+#                 return default
+#
+#
+# iterator = Peekable('Python')
+#
+# print(*iterator)
+# print(iterator.peek(None))
+
+
+# 6.1 Класс LoopTracker🌶️🌶️
+
+
+# class LoopTracker:
+#     def __init__(self, iterable):
+#         self._iterable, self._iterator = list(iterable), iter(iterable)
+#         self._skipped, self._trys, self._last_elem = 0, 0, 0
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         try:
+#             next_elem = next(self._iterator)
+#             self._last_elem = next_elem
+#             self._trys += 1
+#             return next_elem
+#         except StopIteration:
+#             self._skipped += 1
+#             raise StopIteration
+#
+#     def is_empty(self):
+#         if self._trys >= len(self._iterable):
+#             return True
+#         return False
+#
+#     @property
+#     def accesses(self):
+#         return self._trys
+#
+#     @property
+#     def empty_accesses(self):
+#         return self._skipped
+#
+#     @property
+#     def first(self):
+#         try:
+#             return self._iterable[0]
+#         except:
+#             raise AttributeError('Исходный итерируемый объект пуст')
+#
+#     @property
+#     def last(self):
+#         if self._last_elem:
+#             return self._last_elem
+#         else:
+#             raise AttributeError('Последнего элемента нет')
+#
+#
+# loop_tracker = LoopTracker([])
+#
+# try:
+#     print(loop_tracker.first)
+# except AttributeError as e:
+#     print(e)
+
+
+# 6.2 Класс ReversedSequence
+
+# class ReversedSequence:
+#     def __init__(self, iterable):
+#         self._iterable = iterable
+#
+#     def check_item(self, item):
+#         if not isinstance(item, int):
+#             raise TypeError('Необходимо целое число')
+#         if item < 0 or len(self._iterable) <= item:
+#             raise IndexError('Неверный индекс')
+#         return ~item
+#
+#     def __iter__(self):
+#         yield from self._iterable[::-1]
+#
+#     def __getitem__(self, item):
+#         item = self.check_item(item)
+#         if isinstance(item, slice):
+#             return self.__class__(self._iterable[item])
+#         return self._iterable[item]
+#
+#     def __setitem__(self, key, value):
+#         key = self.check_item(key)
+#         if isinstance(key, slice):
+#             return self.__class__(self._iterable[key])
+#         self[key] = value
+#
+#     def __len__(self):
+#         return len(self._iterable)
+#
+#     def __contains__(self, item):
+#         return item in self._iterable
+#
+#
+# reversed_chars = ReversedSequence('abcde')
+#
+# for char in reversed_chars:
+#     print(char)
+
+
+# 6.2 Класс SparseArray
+
+# class SparseArray:
+#     def __init__(self, default):
+#         self._default = default
+#         self._lst = []
+#
+#     def __iter__(self):
+#         return iter(self._lst)
+#
+#     def __setitem__(self, key, value):
+#         if key >= len(self._lst):
+#             self._lst.extend([self._default] * (key + 1 - len(self._lst)))
+#         self._lst[key] = value
+#
+#     def __getitem__(self, item):
+#         return self._default if item >= len(self._lst) else self._lst[item]
+#
+#
+# array = SparseArray(0)
+#
+# array[5] = 1000
+# array[12] = 1001
+#
+# print(array[5])
+# print(array[12])
+# print(array[13])
+
+
+# 6.2 Класс CyclicList
+
+# from itertools import cycle
+#
+#
+# class CyclicList:
+#     def __init__(self, lst=None):
+#         if lst is None:
+#             self._lst = list()
+#         else:
+#             self._lst = lst[:]
+#
+#     def append(self, item):
+#         self._lst.append(item)
+#
+#     def pop(self, index=-1):
+#         pop_item = self._lst.pop(index)
+#         return pop_item
+#
+#     def __getitem__(self, item):
+#         if self.__len__() < item:
+#             item = item % self.__len__()
+#         return self._lst[item]
+#
+#     def __len__(self):
+#         return len(self._lst)
+#
+#     def __iter__(self):
+#         yield from cycle(self._lst)
+#
+#
+# data = [1, 2, 3, 4, 5]
+# cycliclist = CyclicList(data)
+# data.extend([6, 7, 8, 9, 10])
+#
+# count = 0
+# for item in cycliclist:
+#     if count == 10:
+#         break
+#     print(item, end=' ')
+#     count += 1
+
+
+# 6.2 Класс SequenceZip
+
+# from copy import deepcopy
+#
+#
+# class SequenceZip:
+#     def __init__(self, *iterable):
+#         self._iterable = deepcopy(iterable)
+#
+#     def __getitem__(self, item):
+#         for index, i in enumerate(zip(*self._iterable), 0):
+#             if index == item:
+#                 return i
+#
+#     def __len__(self):
+#         return sum(1 for i in zip(*self._iterable))
+#
+#     def __iter__(self):
+#         yield from zip(*self._iterable)
+#
+#
+# x, y, z = [1, 2, 3], [4, 5, 6], [7, 8, 9]
+# sequencezip = SequenceZip(x, y, z)
+# print(len(sequencezip))
+# print(sequencezip[2])
+# x[-1], z[-1] = z[-1], x[-1]
+# print(sequencezip[2])
+
+
+# 6.2 Класс OrderedSet
+
+# from copy import deepcopy
+#
+#
+# class OrderedSet:
+#     def __init__(self, obj):
+#         self._iterable = []
+#         if obj:
+#             for i in deepcopy(obj):
+#                 if i not in self._iterable:
+#                     self._iterable.append(i)
+#
+#     def __iter__(self):
+#         return iter(self._iterable)
+#
+#     def __len__(self):
+#         return len(self._iterable)
+#
+#     def __eq__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self._iterable == other._iterable
+#         if isinstance(other, set):
+#             return set(self._iterable) == other
+#         return NotImplemented
+#
+#     def add(self, item):
+#         if item not in self._iterable:
+#             self._iterable.append(item)
+#
+#     def discard(self, item):
+#         if item in self._iterable:
+#             self._iterable.remove(item)
+#
+#     def __contains__(self, item):
+#         return item in self._iterable
+#
+#
+# print(OrderedSet(['green', 'red', 'blue']) == OrderedSet(['green', 'red', 'blue']))
+# print(OrderedSet(['green', 'red', 'blue']) == OrderedSet(['red', 'blue', 'green']))
+# print(OrderedSet(['green', 'red', 'blue']) == {'blue', 'red', 'green'})
+# print(OrderedSet(['green', 'red', 'blue']) == ['green', 'red', 'blue'])
+# print(OrderedSet(['green', 'red', 'blue']) == 100)
+
+
+# 6.2 Класс AttrDict
+
+# class AttrDict:
+#     def __init__(self, data=()):
+#         self._data = dict(data) or dict()
+#
+#     def __getattr__(self, item):
+#         return self._data[item]
+#
+#     def __getitem__(self, item):
+#         return self._data[item]
+#
+#     def __setitem__(self, key, value):
+#         self._data[key] = value
+#
+#     def __len__(self):
+#         return len(self._data)
+#
+#     def __iter__(self):
+#         yield from self._data.keys()
+
+
+# 6.2 Класс PermaDict
+
+# class PermaDict:
+#     def __init__(self, data=()):
+#         self._data = dict(data) or dict()
+#
+#     def __getitem__(self, item):
+#         return self._data[item]
+#
+#     def __setitem__(self, key, value):
+#         if key not in self._data:
+#             self._data[key] = value
+#         else:
+#             raise KeyError('Изменение значения по ключу невозможно')
+#
+#     def __delitem__(self, key):
+#         if key in self._data:
+#             del self._data[key]
+#
+#     def __len__(self):
+#         return len(self._data)
+#
+#     def __iter__(self):
+#         yield from self._data
+#
+#     def keys(self):
+#         yield from self._data.keys()
+#
+#     def values(self):
+#         yield from self._data.values()
+#
+#     def items(self):
+#         yield from self._data.items()
+#
+#
+# permadict = PermaDict({'name': 'Timur', 'city': 'Moscow'})
+#
+# try:
+#     permadict['name'] = 'Arthur'
+# except KeyError as e:
+#     print(e)
+
+
+# 6.2 Класс HistoryDict 🌶️
+
+# class HistoryDict:
+#     def __init__(self, data=()):
+#         self._data = dict(data) or {}
+#         self._data_history = {k: [v] for k, v in self._data.items()}
+#
+#     def __iter__(self):
+#         yield from self._data
+#
+#     def __setitem__(self, key, value):
+#         self._data[key] = value
+#         self._data_history.setdefault(key, []).append(value)
+#
+#     def __getitem__(self, item):
+#         return self._data[item]
+#
+#     def __delitem__(self, key):
+#         del self._data_history[key]
+#
+#     def __len__(self):
+#         return len(self._data_history)
+#
+#     def keys(self):
+#         return self._data.keys()
+#
+#     def values(self):
+#         return self._data.values()
+#
+#     def items(self):
+#         return self._data.items()
+#
+#     def history(self, key):
+#         return self._data_history.get(key, [])
+#
+#     def all_history(self):
+#         return self._data_history
+#
+#
+# historydict = HistoryDict()
+# print('Keys:', *historydict.keys())
+# print('Values:', *historydict.values())
+# print('Items:', *historydict.items())
+# print('History(key=1):', historydict.history(1))
+# print('History(key=1):', historydict.history(1))
+# print('All history:', historydict.all_history())
+
+
+# Класс MutableString 🌶️
+
+# class MutableString:
+#     def __init__(self, string=''):
+#         self._string = string
+#
+#     def lower(self):
+#         self._string = self._string.lower()
+#
+#     def upper(self):
+#         self._string = self._string.upper()
+#
+#     def __str__(self):
+#         return self._string
+#
+#     def __repr__(self):
+#         return f"{self.__class__.__name__}({repr(self._string)})"
+#
+#     def __len__(self):
+#         return len(self._string)
+#
+#     def __iter__(self):
+#         yield from self._string
+#
+#     def __getitem__(self, item):
+#         if isinstance(item, slice):
+#             return self.__class__(self._string[item])
+#         return self._string[item]
+#
+#     def __setitem__(self, key, value):
+#         txt = list(self._string)
+#         txt[key] = value
+#         self._string = ''.join(txt)
+#
+#     def __delitem__(self, key):
+#         txt = list(self._string)
+#         del txt[key]
+#         self._string = ''.join(txt)
+#
+#     def __add__(self, other):
+#         if isinstance(other, self.__class__):
+#             return self.__class__(self._string + other._string)
+#         return NotImplemented
+#
+#
+# mutablestring = MutableString('beegeek')
+#
+# print(mutablestring)
+# mutablestring[0] = 'B'
+# mutablestring[-4] = 'G'
+# print(mutablestring)
+
+
+# Класс Grouper🌶️🌶️
+
+# class Grouper:
+#     def __init__(self, iterable, key=None):
+#         self._key, self._iterable, self._data = key, iterable, dict()
+#         for i in iterable:
+#             self.add(i)
+#
+#     def add(self, item):
+#         self._data.setdefault(self._key(item), []).append(item)
+#
+#     def group_for(self, item):
+#         return self._key(item)
+#
+#     def __getitem__(self, item):
+#         return self._data[item]
+#
+#     def __contains__(self, item):
+#         return item in self._data
+#
+#     def __iter__(self):
+#         yield from self._data.items()
+#
+#     def __len__(self):
+#         return len(self._data)
+#
+#
+# grouper = Grouper(['hi'], key=lambda s: s[0])
+#
+# print(grouper.group_for('hello'))
+# print(grouper.group_for('bee'))
+# print(grouper['h'])
+# print('b' in grouper)
+
+
+# 6.3 Функция print_file_content()
+
+# def print_file_content(filename):
+#     try:
+#         with open(filename, encoding='utf-8') as file:
+#             print(file.read())
+#     except Exception as error:
+#         print(f'Файл не найден')
+
+
+# 6.3 Функция non_closed_files()
+
+# def non_closed_files(files):
+#     return [file for file in files if not file.closed]
+#
+#
+# with (
+#     open('file1.txt', 'w', encoding='utf-8') as file1,
+#     open('file2.txt', 'w', encoding='utf-8') as file2,
+#     open('file3.txt', 'w', encoding='utf-8') as file3
+# ):
+#     file1.write('i am the first file')
+#     file2.write('i am the second file')
+#     file3.write('i am the third file')
+#
+# file1 = open('file1.txt', encoding='utf-8')
+# file3 = open('file3.txt', encoding='utf-8')
+#
+# for file in non_closed_files([file1, file2, file3]):
+#     print(file.read())
+
+
+# Функция log_for()
+
+# def log_for(log_file, date_str):
+#     with (
+#         open(f'log_for_{date_str}.txt', 'w', encoding='utf-8') as file,
+#         open(log_file, 'r', encoding='utf-8') as input_file
+#     ):
+#         [
+#             print(line.split(' ', 1)[1].strip("\n"), file=file)
+#             for line in input_file.readlines()
+#             if line.split(' ', 1)[0] == date_str
+#         ]
+#
+#
+# with open('log.txt', 'w', encoding='utf-8') as file:
+#     print('2022-01-01 INFO: User logged in', file=file)
+#     print('2022-01-01 ERROR: Invalid input data', file=file)
+#     print('2022-01-02 INFO: User logged out', file=file)
+#     print('2022-01-03 INFO: User registered', file=file)
+#
+# log_for('log.txt', '2022-01-01')
+#
+# with open('log_for_2022-01-01.txt', encoding='utf-8') as file:
+#     print(file.read())
+
+
+# 6.4 Функция is_context_manager()
+
+# def is_context_manager(obj):
+#     return '__enter__' in dir(obj) and '__exit__' in dir(obj)
+#
+# class ContextManager:
+#     def __enter__(self):
+#         return 'beegeek'
+#
+# print(is_context_manager(ContextManager()))
+# print(dir(ContextManager))
+
+
+# 6.5 Класс SuppressAll
+
+# class SuppressAll:
+#     def __enter__(self):
+#         return self
+#
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         return True
+
+
+# 6.5 Класс Greeter
+
+# class Greeter():
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def __enter__(self):
+#         print(f'Приветствую, {self.name}!')
+#         return self
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         print(f'До встречи, {self.name}!')
+#
+#
+# with Greeter('Кейв'):
+#     print('...')
+
+
+# 6.5 Класс Closer
+
+# class Closer():
+#     def __init__(self, obj):
+#         self.obj = obj
+#
+#     def __enter__(self):
+#         return self.obj
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         if hasattr(self.obj, '__enter__') and hasattr(self.obj, '__exit__'):
+#             self.obj.close()
+#         else:
+#             print('Незакрываемый объект')
+#         return True
+#
+#
+# output = open('output.txt', 'w', encoding='utf-8')
+#
+# with Closer(output) as file:
+#     print(file.closed)
+#
+# print(file.closed)
+
+
+# 6.5 Класс ReadableTextFile
+
+# class ReadableTextFile:
+#     def __init__(self, filename):
+#         self.filename = filename
+#
+#     def __enter__(self):
+#         with open(self.filename, 'r', encoding='utf-8') as file:
+#             return [i.strip('\n') for i in file.readlines()]
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         return True
+#
+#
+# with open('glados_quotes.txt', 'w', encoding='utf-8') as file:
+#     print('Только посмотрите!', file=file)
+#     print('Как величаво она парит в воздухе', file=file)
+#     print('Как орел', file=file)
+#     print('На воздушном шаре', file=file)
+#
+# with ReadableTextFile('glados_quotes.txt') as file:
+#     for line in file:
+#         print(line)
+
+
+# 6.5 Класс Reloopable
+
+# class Reloopable:
+#     def __init__(self, file):
+#         self.file = file
+#
+#     def __enter__(self):
+#         return self.file.readlines()
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         self.file.close()
+#         return True
+#
+#
+# with open('file.txt', 'w') as file:
+#     file.write('Evil is evil\n')
+#     file.write('Lesser, greater, middling\n')
+#     file.write('Makes no difference\n')
+#
+# with Reloopable(open('file.txt')) as reloopable:
+#     for line in reloopable:
+#         print(line.strip())
+#     for line in reloopable:
+#         print(line.strip())
+
+
+# 6.5 Класс UpperPrint
+
+# import sys
+#
+#
+# class UpperPrint:
+#     def __init__(self):
+#         self.new_output = 'new_output.txt'
+#
+#     def __enter__(self):
+#         self.standart_output = sys.stdout
+#         sys.stdout = open(self.new_output, 'w', encoding='utf-8')
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         sys.stdout = self.standart_output
+#         with open(self.new_output, 'r', encoding='utf-8') as out:
+#             for i in out.readlines():
+#                 print(i.upper().strip('\n'))
+#
+# print('Если жизнь одаривает вас лимонами — не делайте лимонад')
+# print('Заставьте жизнь забрать их обратно!')
+#
+# with UpperPrint():
+#     print('Мне не нужны твои проклятые лимоны!')
+#     print('Что мне с ними делать?')
+#
+# print('Требуйте встречи с менеджером, отвечающим за жизнь!')
+
+
+# 6.5 Класс Suppress
+
+# class Suppress:
+#     def __init__(self, *args):
+#         self.errors = args
+#         self.exception = None
+#
+#     def __enter__(self):
+#         return self
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         if exc_type in self.errors:
+#             self.exception = exc_val
+#             return True
+#
+#
+# with Suppress(TypeError, ValueError) as context:
+#     number = int('я число')
+#
+# print(context.exception)
+# print(type(context.exception))
+
+
+# 6.5 Класс WriteSpy🌶️
+
+# class WriteSpy:
+#     def __init__(self, file1, file2, to_close=False):
+#         self.file1 = file1
+#         self.file2 = file2
+#         self.to_close = to_close
+#
+#     def write(self, txt):
+#         if (not self.file1.closed and self.file1.writable()) and (not self.file2.closed and self.file2.writable()):
+#             self.file1.write(txt)
+#             self.file2.write(txt)
+#         else:
+#             raise ValueError('Файл закрыт или недоступен для записи')
+#
+#     def close(self):
+#         self.file1.close()
+#         self.file2.close()
+#
+#     def writable(self):
+#         if not self.file1.closed and not self.file2.closed:
+#             return self.file1.writable() and self.file2.writable()
+#         return False
+#
+#     def closed(self):
+#         return self.file1.closed and self.file2.closed
+#
+#     def __enter__(self):
+#         return self
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         if self.to_close:
+#             self.file1.close()
+#             self.file2.close()
+#
+#
+# f1 = open('file1.txt', mode='w')
+# f2 = open('file2.txt', mode='w')
+#
+# with WriteSpy(f1, f2) as combined:
+#     pass
+#
+# print(combined.closed())
+
+
+# 6.5 Класс Atomic 🌶️
+
+# from copy import deepcopy, copy
+#
+#
+# class Atomic:
+#     def __init__(self, data, deep=False):
+#         self.data = data
+#         self.deep = deep
+#
+#     def __enter__(self):
+#         if self.deep:
+#             self._temp = deepcopy(self.data)
+#         else:
+#             self._temp = copy(self.data)
+#         return self._temp
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         if exc_type is None:
+#             if isinstance(self.data, list):
+#                 self.data[:] = self._temp
+#             if isinstance(self.data, set | dict):
+#                 self.data |= self._temp
+#         return True
+#
+#
+# numbers = {1, 2, 3, 4, 5}
+#
+# with Atomic(numbers) as atomic:
+#     atomic.add(6)
+#     atomic.append(7)  # добавление элемента с помощью несуществующего метода
+#
+# print(sorted(numbers))
+#
+# with Atomic(numbers) as atomic:
+#     atomic.add(6)
+#
+# print(sorted(numbers))
+
+
+# 6.5 Класс AdvancedTimer
+
+# from time import perf_counter
+#
+#
+# class AdvancedTimer:
+#     def __init__(self):
+#         self.last_run = None
+#         self.min, self.max = None, None
+#         self.runs = []
+#
+#     def __enter__(self):
+#         self.start = perf_counter()
+#         return self
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         self.last_run = perf_counter() - self.start
+#         self.runs.append(self.last_run)
+#         self.min = min(self.runs)
+#         self.max = max(self.runs)
+#         return False
+#
+#
+# from time import sleep
+#
+# timer = AdvancedTimer()
+#
+# with timer:
+#     sleep(1.5)
+#
+# with timer:
+#     sleep(0.7)
+#
+# with timer:
+#     sleep(1)
+#
+# print([round(runtime, 1) for runtime in timer.runs])
+# print(round(timer.min, 1))
+# print(round(timer.max, 1))
+
+
+# 6.5 Класс HtmlTag 🌶️
+
+# class HtmlTag:
+#     space = -1
+#
+#     def __init__(self, tag, inline=False):
+#         self.tag = tag
+#         self.inline = inline
+#
+#     def __enter__(self):
+#         self.__class__.space += 1
+#         if self.inline is False:
+#             print('  ' * self.space + f'<{self.tag}>')
+#         else:
+#             print('  ' * self.space + f'<{self.tag}>', end='')
+#         return self
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         if self.inline is False:
+#             print('  ' * self.space + f'</{self.tag}>')
+#         self.__class__.space -= 1
+#
+#     def print(self, text):
+#         if self.inline is False:
+#             print('    ' * self.space + text)
+#         else:
+#             print(f"{text}</{self.tag}>")
+#
+#
+# with HtmlTag('body') as _:
+#     with HtmlTag('h1') as header:
+#         header.print('Поколение Python')
+#     with HtmlTag('p') as section:
+#         section.print('Cерия курсов по языку программирования Python от команды BEEGEEK')
+
+
+# 6.5 Класс TreeBuilder 🌶️🌶️
+
+# class TreeBuilder:
+#     def __init__(self):
+#
+#     def __enter__(self):
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#
+#     def add(self, item):
+#
+#     def structure(self):
+#
+#
+# tree = TreeBuilder()
+# print(tree.structure())
+#
+# tree.add('1st')
+# print(tree.structure())
+#
+# with tree:
+#     tree.add('2nd')
+#     with tree:
+#         tree.add('3rd')
+#     tree.add('4th')
+#     with tree:
+#         pass
+#
+# print(tree.structure())
+
+
+# 6.6 Контекстный менеджер make_tag
+
+# from contextlib import contextmanager
+#
+#
+# @contextmanager
+# def make_tag(tag):
+#     print(tag)
+#     yield
+#     print(tag)
+#
+#
+# with make_tag('---'):
+#     print('Поколение Python')
+
+
+# 6.6 Контекстный менеджер reversed_print
+
+# import sys
+# from contextlib import contextmanager
+#
+#
+# @contextmanager
+# def reversed_print():
+#     standart_stdout = sys.stdout.write
+#     sys.stdout.write = lambda x: standart_stdout(x[::-1])
+#     yield sys.stdout.write
+#     sys.stdout.write = standart_stdout
+#
+#
+# print('Вывод вне блока with')
+#
+# with reversed_print():
+#     print('Вывод внутри блока with')
+#
+# print('Вывод вне блока with')
+
+
+# 6.6 Контекстный менеджер safe_write
+
+# from contextlib import contextmanager
+#
+#
+# @contextmanager
+# def safe_write(path):
+#     try:
+#         backup = open('backup.txt', mode='w')
+#         yield backup
+#         backup.close()
+#     except Exception as err:
+#         print(f'Во время записи в файл было возбуждено исключение {type(err).__name__}')
+#     else:
+#         txt = open('backup.txt', mode='r')
+#         path_file = open(path, 'w')
+#         path_file.write(txt.read())
+#         path_file.close(), txt.close()
+#
+#
+# with safe_write('undertale.txt') as file:
+#     file.write('Тень от руин нависает над вами, наполняя вас решительностью\n')
+#
+# with safe_write('undertale.txt') as file:
+#     print('Под весёлый шорох листвы вы наполняетесь решительностью', file=file)
+#     raise ValueError
+#
+# with open('undertale.txt') as file:
+#     print(file.read())
+
+
+# 6.6 Контекстный менеджер safe_open
+
+# from contextlib import contextmanager
+#
+#
+# @contextmanager
+# def safe_open(filename, mode='r'):
+#     try:
+#         temp = open(filename, mode=mode)
+#         yield (temp, None)
+#         temp.close()
+#     except Exception as error:
+#         yield (None, error)
+#
+#
+# with safe_open('Ellies_jokes_2.txt') as file:
+#     file, error = file
+#     print(file)
+#     print(error)
+
+
+# 6.8 Класс NonKeyword
+
+# from keyword import kwlist
+#
+#
+# class NonKeyword():
+#     def __init__(self, name):
+#         self._attr = name
+#
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if self._attr in instance.__dict__:
+#             return instance.__dict__[self._attr]
+#         else:
+#             raise AttributeError('Атрибут не найден')
+#
+#     def __set__(self, instance, value):
+#         if value not in kwlist:
+#             instance.__dict__[self._attr] = value
+#         else:
+#             raise ValueError('Некорректное значение')
+#
+#
+# class NonKeywordData:
+#     obj = NonKeyword('obj')
+#
+#
+# data = [1, 2.3, [4, 5, 6], (7, 8, 9), {10: 11, 12: 13, 14: 15}, True, False, 'Mantrida']
+# nonkeyworddata = NonKeywordData()
+#
+# for item in data:
+#     nonkeyworddata.obj = item
+#     print(nonkeyworddata.obj)
+
+
+# 6.8 Класс NonNegativeInteger
+
+# class NonNegativeInteger():
+#     def __init__(self, name, default=None):
+#         self._attr = name
+#         self._default = default
+#
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if self._attr in instance.__dict__:
+#             return instance.__dict__[self._attr]
+#         if self._default is None:
+#             raise AttributeError('Атрибут не найден')
+#         return self._default
+#
+#     def __set__(self, instance, value):
+#         if isinstance(value, int) and value >= 0:
+#             instance.__dict__[self._attr] = value
+#         else:
+#             raise ValueError('Некорректное значение')
+#
+#
+# class Student:
+#     score = NonNegativeInteger('score')
+#
+# student = Student()
+# student.score = 90
+#
+# print(student.score)
+
+
+# 6.8 Класс LimitedTakes
+
+# class MaxCallsException(Exception):
+#     pass
+#
+#
+# class LimitedTakes:
+#     def __set_name__(self, owner, name):
+#         self._attr = name
+#
+#     def __init__(self, times):
+#         self._times = times
+#         self._counter = 0
+#
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if self._times == self._counter:
+#             raise MaxCallsException('Превышено количество доступных обращений')
+#         if self._attr in instance.__dict__:
+#             self._counter += 1
+#             return instance.__dict__[self._attr]
+#         else:
+#             raise AttributeError('Атрибут не найден')
+#
+#     def __set__(self, instance, value):
+#         instance.__dict__[self._attr] = value
+#
+#
+# class Programmer:
+#     name = LimitedTakes(1)
+#
+#
+# programmer = Programmer()
+#
+# try:
+#     print(programmer.name)
+# except AttributeError as e:
+#     print(e)
+
+
+# 6.8 Класс TypeChecked
+
+# class TypeChecked:
+#     def __set_name__(self, owner, name):
+#         self._attr = name
+#
+#     def __init__(self, *args):
+#         self._types = args
+#
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return None
+#         if self._attr in instance.__dict__:
+#             return instance.__dict__[self._attr]
+#         raise AttributeError('Атрибут не найден')
+#
+#     def __set__(self, instance, value):
+#         if type(value) in self._types:
+#             instance.__dict__[self._attr] = value
+#
+#         else:
+#             raise TypeError('Некорректное значение')
+
+
+# class Student:
+#     age = TypeChecked(int, float)
+#
+# student = Student()
+#
+# student.age = 18
+# print(student.age)
+#
+# student.age = 18.5
+# print(student.age)
+
+
+# 6.8 Класс RandomNumber
+
+# from random import randint
+#
+#
+# class RandomNumber:
+#     def __set_name__(self, owner, name):
+#         self._attr = name
+#
+#     def __init__(self, start, end, cache=False):
+#         self.start = start
+#         self.end = end
+#         self.cache = cache
+#         self.fst = None
+#
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return None
+#         if self.fst:
+#             return self.fst
+#         if self.cache is False:
+#             return randint(self.start, self.end)
+#         else:
+#             self.fst = randint(self.start, self.end)
+#             return self.fst
+#
+#     def __set__(self, instance, value):
+#         raise AttributeError('Изменение невозможно')
+#
+#
+# class MagicPoint:
+#     x = RandomNumber(0, 5)
+#     y = RandomNumber(0, 5)
+#     z = RandomNumber(0, 5)
+#
+#
+# magicpoint = MagicPoint()
+#
+# try:
+#     magicpoint.x = 10
+# except AttributeError as e:
+#     print(e)
+
+
+# 6.8 Класс Versioned🌶️
+
+# class Versioned():
+#     def __set_name__(self, owner, name):
+#         self._attr = name
+#
+#     def __get__(self, instance, owner):
+#         if instance is None:
+#             return self
+#         if self._attr in instance.__dict__:
+#             return instance.__dict__[self._attr][-1]
+#         raise AttributeError('Атрибут не найден')
+#
+#     def __set__(self, instance, value):
+#         instance.__dict__.setdefault(self._attr, []).append(value)
+#
+#     def get_version(self, instance, ver):
+#         return instance.__dict__[self._attr][ver - 1]
+#
+#     def set_version(self, instance, ver):
+#         instance.__dict__[self._attr].append(instance.__dict__[self._attr].pop(ver-1))
+#
+# class Student:
+#     age = Versioned()
+#
+#
+# student = Student()
+#
+# student.age = 18
+# student.age = 19
+# student.age = 20
+#
+# print(student.age)
+# Student.age.set_version(student, 1)
+# print(student.age)
+
+
+# ____
+# EP_4
+# ____
+
+
+# 7.1 Иерархия классов 🛸
+
+# class Vehicle:
+#     pass
+#
+#
+# class WaterVehicle(Vehicle):
+#     pass
+#
+#
+# class LandVehicle(Vehicle):
+#     pass
+#
+#
+# class Car(LandVehicle):
+#     pass
+#
+#
+# class Motocycle(LandVehicle):
+#     pass
+#
+#
+# class Bicycle(LandVehicle):
+#     pass
+#
+#
+# class AirVehicle(Vehicle):
+#     pass
+#
+#
+# class Propeller(AirVehicle):
+#     pass
+#
+#
+# class Jet(AirVehicle):
+#     pass
+
+
+# 7.1 Иерархия классов 🔶
+
+# class Shape():
+#     pass
+#
+#
+# class Circle(Shape):
+#     pass
+#
+#
+# class Polygon(Shape):
+#     pass
+#
+#
+# class Triangle(Polygon):
+#     pass
+#
+#
+# class IsoscelesTriangle(Triangle):
+#     pass
+#
+#
+# class EquilateralTriangle(Triangle):
+#     pass
+#
+#
+# class Quadrilateral(Polygon):
+#     pass
+#
+#
+# class Parallelogram(Quadrilateral):
+#     pass
+#
+#
+# class Rectangle(Parallelogram):
+#     pass
+#
+#
+# class Square(Rectangle):
+#     pass
+
+
+# 7.1 Иерархия классов 🐍
+
+# class Animal:
+#     def sleep(self):
+#         pass
+#
+#     def eat(self):
+#         pass
+#
+#
+# class Fish(Animal):
+#     def swim(self):
+#         pass
+#
+#
+# class Bird(Animal):
+#     def lay_eggs(self):
+#         pass
+#
+#
+# class FlyingBird(Bird):
+#     def fly(self):
+#         pass
+
+
+# 7.1 Классы User и PremiumUser
+
+
+# class User:
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def skip_ads(self):
+#         return False
+#
+#
+# class PremiumUser(User):
+#     def skip_ads(self):
+#         return True
+
+
+# 7.1 Классы Validator и NumberValidator
+
+# class Validator:
+#     def __init__(self, obj):
+#         self.obj = obj
+#
+#     def is_valid(self):
+#         return None
+#
+#
+# class NumberValidator(Validator):
+#     def is_valid(self):
+#         return isinstance(self.obj, int | float)
+
+
+# 7.1 Класс Counter и подклассы
+
+
+# class Counter:
+#     def __init__(self, start=0):
+#         self.start = start
+#         self.value = start
+#
+#     def inc(self, num=1):
+#         self.value += num
+#
+#     def dec(self, num=1):
+#         self.value -= num
+#         if self.value < 0:
+#             self.value = 0
+#
+#
+# class NonDecCounter(Counter):
+#     def dec(self, num=1):
+#         pass
+#
+#
+# class LimitedCounter(Counter):
+#     def __init__(self, start=0, limit=10):
+#         Counter.__init__(self, start)
+#         self.limit = limit
+#
+#     def inc(self, num=1):
+#         if self.value + num <= self.limit:
+#             self.value += num
+#         else:
+#             self.value = self.limit
+#
+#
+# counter = LimitedCounter(start=5, limit=30)
+#
+# print(counter.value)
+# counter.inc()
+# counter.inc(4)
+# print(counter.value)
+# counter.dec()
+# counter.dec(2)
+# print(counter.value)
+# counter.inc(24)
+# print(counter.value)
+
+
